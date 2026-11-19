@@ -14,7 +14,7 @@ export function initCinema({ audio }) {
   audio.loop = false;
   audio.src = CONFIG.cancion;
 
-  /* ---------- Asientos (con una pareja en primera fila) ---------- */
+  /* ---------- Asientos ---------- */
   const seats = $('#seats');
   const mkRow = (cls, n, extra) => {
     const r = document.createElement('div'); r.className = 'srow ' + cls;
@@ -22,7 +22,7 @@ export function initCinema({ audio }) {
     seats.appendChild(r);
   };
   mkRow('back', 9);
-  mkRow('front', 7, (i) => (i === 3 ? ' heads a' : i === 4 ? ' heads b' : ''));
+  mkRow('front', 7);
 
   /* ---------- Utilidades ---------- */
   const wait = (ms) => new Promise((res) => setTimeout(res, reduce ? Math.min(ms, 60) : ms));

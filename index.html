@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Camila · Función privada</title>
+  <meta name="description" content="Una función privada, hecha para Camila.">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Caveat+Brush&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Filtro de crayón: bordes temblorosos + textura de cera -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="crayon" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="4" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="4.5" xChannelSelector="R" yChannelSelector="G" result="wobbly"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="9" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.85" result="cera"/>
+      <feComposite in="wobbly" in2="cera" operator="in"/>
+    </filter>
+  </defs>
+</svg>
+
+<div class="cinema" id="cinema">
+  <div class="room" id="room">
+    <div class="walls dimmable" aria-hidden="true"></div>
+    <div class="sconce l1" aria-hidden="true"></div><div class="sconce l2" aria-hidden="true"></div><div class="sconce l3" aria-hidden="true"></div>
+    <div class="sconce r1" aria-hidden="true"></div><div class="sconce r2" aria-hidden="true"></div><div class="sconce r3" aria-hidden="true"></div>
+
+    <div class="valance dimmable"><span id="marquee">CAMILA</span></div>
+
+    <div class="stage" id="stage">
+      <div class="screen" id="screen">
+        <div class="film" id="film"></div>
+        <div class="grain" aria-hidden="true"></div>
+        <div class="vignette" aria-hidden="true"></div>
+      </div>
+      <div class="curtain left dimmable" id="curtainL"></div>
+      <div class="curtain right dimmable" id="curtainR"></div>
+    </div>
+
+    <div class="beam" id="beam" aria-hidden="true"></div>
+    <div class="seats dimmable" id="seats" aria-hidden="true"></div>
+  </div>
+
+  <!-- Aviso de volumen + botón de inicio -->
+  <div class="cine-ui" id="intro">
+    <div class="volume-notice">
+      <svg class="vol-icon" viewBox="0 0 64 64" width="72" height="72" aria-hidden="true">
+        <path d="M8 24h12l14-12v40L20 40H8z" fill="currentColor"/>
+        <path class="w1" d="M42 22a14 14 0 0 1 0 20" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+        <path class="w2" d="M48 14a24 24 0 0 1 0 36" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>
+      <p class="vol-title">Sube el volumen</p>
+      <p class="vol-sub">Esta función se vive con sonido.<br>La música es parte de la película.</p>
+      <button class="start" id="start" type="button">Comenzar</button>
+    </div>
+  </div>
+
+  <!-- Final -->
+  <div class="cine-ui" id="finale" hidden>
+    <div class="finale-box">
+      <p class="finale-msg" id="finalMsg"></p>
+      <button class="enter" id="replay" type="button">Ver de nuevo</button>
+    </div>
+  </div>
+
+  <!-- Si la música se pausa -->
+  <div class="resume" id="resume" hidden>
+    <p>La música es parte de la función.</p>
+    <button class="enter" id="resumeBtn" type="button">Continuar</button>
+  </div>
+
+  <p class="song-missing" id="songMissing" hidden>Modo de prueba: aún no hay canción en <code>assets/musica/cancion.m4a</code></p>
+</div>
+
+<audio id="audio" preload="auto"></audio>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
